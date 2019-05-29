@@ -105,18 +105,24 @@ export default {
             if (bol) {
                 this.price = this.allPrice[this.classSelect + 36];
                 this.yearSelect = '3';
+                this.select = ['tg'];
             } else {
                 this.price = this.allPrice[this.classSelect + 11];
                 this.yearSelect = '1';
+                this.select = [];
             }
+            
+            console.log(this.price);
         },
         yearSelect: function() {
             let bol = this.yearSelect == 3 || this.yearSelect == 5;
-            // this.select = [];
+            
             if (bol) {
                 this.price = this.allPrice[this.classSelect + this.yearSelect + 6];
+                this.select = ['tg'];
             } else {
-                this.price = this.allPrice[this.classSelect + this.yearSelect];
+                this.price = this.allPrice[this.classSelect + this.yearSelect + 1];
+                this.select = [];
             }
         },
         select: function() {
@@ -204,7 +210,6 @@ export default {
         handleBuy() {
             console.log(this.classSelect);
             console.log(this.yearSelect);
-            console.log(this.select.length);
             console.log(this.select);
         }
     }
