@@ -85,6 +85,7 @@ export default {
     data() {
         return {
             allPrice:lessonJson.price,
+            allId:lessonJson.lessonId,
             select: [],
             classSelect: "",
             yearSelect: "",
@@ -208,9 +209,26 @@ export default {
             this.select = ary;
         },
         handleBuy() {
-            console.log(this.classSelect);
-            console.log(this.yearSelect);
-            console.log(this.select);
+            const selectSubjet = this.select;
+            let gc = new Object();
+            gc.goodsList = new Array();
+            for(let i = 0; i < selectSubjet.length; i++){
+                let cur = selectSubjet[i];
+                let curId = this.allId[this.classSelect + this.yearSelect + cur];
+                for(let j = 0; j < curId.dataId.split(" ").length; j++){
+                    let goods = new Object();
+                    goods.pid = curId.dataId.split(" ")[j];
+                    goods.pclassific = 2;
+                    goods.venderId = 1;
+                    goods.promoId = curId.proId;
+                    gc.goodsList.push(goods);
+                }
+            }
+            let goodsInfo = JSON.stringify(gc);
+            console.log(goodsInfo);
+            if (gc.goodsList.length != 0) {
+                window.location.href = "http://p.m.dongao.com/shopping/addCart.html?buyGoodsInfo=" + goodsInfo;
+            }
         }
     }
 };
